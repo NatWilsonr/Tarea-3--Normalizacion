@@ -1,5 +1,7 @@
 from normalization.components import Relvar, FunctionalDependency, MultivaluedDependency
 
+#Todo lo que estuvimos viendo en clase
+#NO utilizar acentos
 
 if __name__ == "__main__":
     fd1 = FunctionalDependency("{RFC} -> {Nombre, CP}")
