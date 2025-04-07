@@ -1,6 +1,6 @@
 from normalization.components import Relvar, FunctionalDependency, MultivaluedDependency
 
-#Todo lo que estuvimos viendo en clase
+#Todas las df que estuvimos viendo en clase
 #NO utilizar acentos
 
 if __name__ == "__main__":
