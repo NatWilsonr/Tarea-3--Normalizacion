@@ -57,7 +57,7 @@ Este archivo contiene las funciones que hacen el "trabajo pesado" de normalizaci
 
 ---
 
-### Pruebas agregadas (en `main.py`)
+### Pruebas agregadas (en `pruebasMain.py`)
 
 Se implementaron pruebas para verificar que cada función funciona correctamente, incluyendo:
 
@@ -67,7 +67,7 @@ Se implementaron pruebas para verificar que cada función funciona correctamente
 - `is_relvar_in_bcnf()` con ejemplos que cumplen y no cumplen
 - `is_relvar_in_4nf()` con ejemplos que cumplen y no cumplen
 
-➡️ Ver `main.py` para ver cada sección delimitada, con comentarios claros y separadores visuales.
+➡️ Ver `pruebasMain.py` para ver cada sección delimitada, con comentarios claros y separadores visuales.
 
 ---
 
@@ -90,7 +90,7 @@ pero debe funcionar con 3.8 o superior.
 - `components.py`: Estructuras base y validaciones de dependencias
 - `algorithms.py`: Lógica de normalización paso a paso
 - `exceptions.py`: Validaciones para errores de expresión o encabezado inválido
-- `pruebas.py`: Pruebas automáticas con comentarios organizados
+- `pruebasMain.py`: Pruebas automáticas con comentarios organizados
 - `example.py`: Ejemplo realista preconstruido (incluido en la tarea)
 
 
