@@ -47,8 +47,7 @@ def closure(attributes: set[Attribute], functional_dependencies: set[FunctionalD
         #functional_dependencies → el conjunto de dependencias funcionales F
 def is_superkey(attributes: set[Attribute], heading: set[Attribute], functional_dependencies: set[FunctionalDependency]) -> bool:
     # TODO: Actividad 4
-    #Un conjunto de atributos X es un superkey si su cierre determina todos los atributos 
-    # del encabezado E
+    #Un conjunto de atributos X es un superkey si su cierre determina el encabezado E
     
     #Obetenemos el cierre de los conjuntos dados
     cierre = closure(attributes, functional_dependencies)
@@ -66,7 +65,32 @@ def is_superkey(attributes: set[Attribute], heading: set[Attribute], functional_
 
 def is_key(attributes: set[Attribute], heading: set[Attribute], functional_dependencies: set[FunctionalDependency]) -> bool:
     # TODO: Actividad 5
-    raise NotImplementedError()
+    #un conjunto de atributos es X es una llave si:
+        #1- X es una superllave (Todas las llaves son Super llaves, pero NO todas las Superllaves son llaves)
+        #2- Que sea irreducible (No puedes quitarle ningún atributo sin que deje de ser superclave)
+
+    #Verificamos si X es una superllave -> en caso de que NO, entonces ya no hacemos lo demás 
+    if not is_superkey(attributes, heading, functional_dependencies):
+        return False
+    
+    #Lo convertimos a lista para poder quitar uno por uno
+    lista_atributos = list(attributes)
+
+    #Revisamos todos los subconjuntos que resultan al quitar un atributo
+    for atributo in range( len(lista_atributos) ):
+        subconjunto = set()  # Creamos un subconjunto vacío
+
+    # Agregamos todos menos el i-ésimo
+        for j in range( len(lista_atributos) ):
+            if atributo != j:
+                subconjunto.add( lista_atributos[j] )
+
+        # Revisamos si ese subconjunto también es superclave
+        if is_superkey( subconjunto, heading, functional_dependencies ):
+            return False  # No es irreducible
+
+    # Si no hubo subconjunto que fuera superclave, entonces sí es clave
+    return True
 
 
 def is_relvar_in_bcnf(relvar: Relvar):
