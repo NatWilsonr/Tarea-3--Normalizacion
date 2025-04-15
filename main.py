@@ -48,3 +48,25 @@ if __name__ == "__main__": #superllave
     print("\n3- ¿Es superclave?", is_superkey(claves_posibles, encabezado, {fd1, fd2}))
     #Resultado correcto: A determina todo el encabezado -> es una superllave
 
+from normalization.components import Attribute, FunctionalDependency
+from normalization.algorithms import is_key
+
+if __name__ == "__main__":
+    # Creamos los atributos
+    A = Attribute("A")
+    B = Attribute("B")
+    C = Attribute("C")
+
+    # Creamos las dependencias funcionales
+    fd1 = FunctionalDependency("{A} -> {B}")
+    fd2 = FunctionalDependency("{B} -> {C}")
+
+    # Definimos el encabezado
+    encabezado = {A, B, C}
+
+    # Prueba 1: A debería ser clave
+    print("¿{A} es clave?", is_key({A}, encabezado, {fd1, fd2}))  # Esperamos True
+
+    # Prueba 2: A, B no es clave porque no es irreducible
+    print("¿{A, B} es clave?", is_key({A, B}, encabezado, {fd1, fd2}))  # Esperamos False
+
