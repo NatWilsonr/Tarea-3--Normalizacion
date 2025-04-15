@@ -15,6 +15,69 @@
 Este proyecto implementa funciones relacionadas con la teoría de normalización de bases de datos.
 
 
+---
+
+## 🤝 Nat-nota para el equipo (temporal)
+
+### 📂 Sobre `components.py`
+
+Este archivo contiene las **clases principales** del modelo relacional:
+
+- `Attribute`: representa un atributo (como A, B, C...)
+- `Dependency`: clase base para dependencias funcionales y multivaluadas
+- `FunctionalDependency`: representa dependencias como `{A} -> {B}`
+- `MultivaluedDependency`: representa dependencias como `{A} ->-> {B}`
+- `Relvar`: representa una relación (una tabla), que incluye:
+  - Encabezado (atributos)
+  - Conjunto de dependencias funcionales
+  - Conjunto de dependencias multivaluadas
+
+🔧 **TODOs resueltos aquí:**
+- `FunctionalDependency.is_trivial()`
+- `MultivaluedDependency.is_trivial(heading)`
+
+---
+
+### ⚙️ Sobre `algorithms.py`
+
+Este archivo contiene las funciones que hacen el "trabajo pesado" de normalización:
+
+- `closure(...)`: calcula el cierre de un conjunto de atributos
+- `is_superkey(...)`: revisa si un conjunto de atributos determina todo el encabezado (es superllave)
+- `is_key(...)`: revisa si un conjunto es llave (irreducible)
+- `is_relvar_in_bcnf(...)`: determina si una relación está en BCNF
+- `is_relvar_in_4nf(...)`: determina si una relación está en 4NF
+
+🔧 **TODOs resueltos aquí:**
+- `closure`
+- `is_superkey`
+- `is_key`
+- `is_relvar_in_bcnf`
+- `is_relvar_in_4nf`
+
+---
+
+### Pruebas agregadas (en `main.py`)
+
+Se implementaron pruebas para verificar que cada función funciona correctamente, incluyendo:
+
+- `is_trivial()` para DFs
+- `closure()` con dependencias en cadena
+- `is_superkey()` y `is_key()` con conjuntos válidos y no válidos
+- `is_relvar_in_bcnf()` con ejemplos que cumplen y no cumplen
+- `is_relvar_in_4nf()` con ejemplos que cumplen y no cumplen
+
+➡️ Ver `main.py` para ver cada sección delimitada, con comentarios claros y separadores visuales.
+
+---
+
+🧼 *Esta sección es temporal y puede borrarse antes de entrega final si el README ya está claro para todos.*
+
+
+
+---
+
+
 ## 💻 Configuración
 
 Este proyecto no tiene dependencias adicionales de Python, por lo que no es 
