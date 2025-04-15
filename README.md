@@ -104,6 +104,15 @@ pero debe funcionar con 3.8 o superior.
 
 ## 🧪 Ejemplos de uso con resultados esperados
 
+Las siguientes pruebas están implementadas en el archivo `pruebasMain.py`.  
+Cada una está separada y comentada claramente para identificar qué función se está evaluando.  
+
+Puede ejecutar todo con:
+```bash
+python pruebasMain.py
+```
+
+
 | Prueba | Descripción | Resultado esperado |
 |--------|-------------|--------------------|
 | 1 | Verifica si una DF es trivial | True o False |
