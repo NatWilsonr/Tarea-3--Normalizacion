@@ -39,7 +39,11 @@ class Dependency(ABC):
 
         # extracting determinant and dependant expressions
         determinant_expression, dependant_expression = expression.split(self._SEPARATOR)
+
+        #Conjunto del lado izquierdo de la dependencia funcional
         self.determinant = Dependency._get_set_from_expression(determinant_expression)
+
+        #Conjunto del lado derecho de la dependencia funcional
         self.dependant = Dependency._get_set_from_expression(dependant_expression)
 
     def __str__(self) -> str:
@@ -79,7 +83,16 @@ class FunctionalDependency(Dependency):
 
     def is_trivial(self) -> bool:
         # TODO: Actividad 1
-        return self.dependant.issubset(self.determinant)
+        conjunto_dependiente = self.dependant
+        conjunto_determinante = self.determinant
+
+        #Revisa una por uno si cada atributo del lado derecho sí esta contenido
+        # en el lado izquierdo.  
+        for atributo in conjunto_dependiente:
+            if atributo not in conjunto_determinante:
+                return False
+            
+        return True
 
 
 class MultivaluedDependency(Dependency):
