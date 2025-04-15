@@ -41,10 +41,27 @@ def closure(attributes: set[Attribute], functional_dependencies: set[FunctionalD
       #Paso final: regresamos el cierre
     return cierre    
 
-
+    #La funcion recibe: 
+        #attributes → el conjunto X
+        #Heading → el conjunto E (encabezado)
+        #functional_dependencies → el conjunto de dependencias funcionales F
 def is_superkey(attributes: set[Attribute], heading: set[Attribute], functional_dependencies: set[FunctionalDependency]) -> bool:
     # TODO: Actividad 4
-    raise NotImplementedError()
+    #Un conjunto de atributos X es un superkey si su cierre determina todos los atributos 
+    # del encabezado E
+    
+    #Obetenemos el cierre de los conjuntos dados
+    cierre = closure(attributes, functional_dependencies)
+
+    #bandera de resultado
+    es_superclave = True  # Si no faltó ninguno, sí es superclave
+
+    #Verificamos si el cierre contiene todos los atributos del encabezado
+    for atributo in heading:
+        if atributo not in cierre:
+            es_superclave = False  # Si falta uno, no es superclave
+
+    return es_superclave
 
 
 def is_key(attributes: set[Attribute], heading: set[Attribute], functional_dependencies: set[FunctionalDependency]) -> bool:

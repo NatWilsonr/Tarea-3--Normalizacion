@@ -9,7 +9,7 @@ if __name__ == "__main__":
     print(fd1.is_trivial()) #false
     print(fd2.is_trivial()) #True
 
-if __name__ == "__main__":
+if __name__ == "__main__": #CLOSURE 
     A = Attribute("A")
     B = Attribute("B")
     C = Attribute("C")
@@ -32,3 +32,5 @@ if __name__ == "__main__":
     esperado = {"A", "B", "C"}
     obtenido = nombres
     print(obtenido == esperado)  # Esto te imprime True si el cierre fue correcto
+
+if
