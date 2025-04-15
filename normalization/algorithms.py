@@ -136,7 +136,7 @@ def is_relvar_in_4nf(relvar: Relvar):
     for dmv in relvar.multivalued_dependencies:
         # Verificamos si es NO trivial
         if not dmv.is_trivial( encabezado ):
-            lado_izquiero = dmv.determinant
+            lado_izquierdo = dmv.determinant
 
             # Si el determinante no es superllave, falla la 4NF
             if not is_superkey( lado_izquierdo, encabezado, relvar.functional_dependencies ):

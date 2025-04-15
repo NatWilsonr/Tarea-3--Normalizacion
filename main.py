@@ -115,3 +115,18 @@ if __name__ == "__main__": #EJ2, FNBC
     # Probamos si está en BCNF
     print("¿Relación simple está en BCNF?", is_relvar_in_bcnf(relvar_bcnf))
 
+if __name__ == "__main__": #relvar en 4FN
+    A = Attribute("A")
+    B = Attribute("B")
+    C = Attribute("C")
+
+    mvd = MultivaluedDependency("{A} ->-> {B}")
+    fd = FunctionalDependency("{A, C} -> {B}")
+
+    relvar = Relvar(
+        heading=["A", "B", "C"],
+        functional_dependencies=[fd],
+        multivalued_dependencies=[mvd]
+    )
+
+    print("¿Relación está en 4NF?", is_relvar_in_4nf(relvar))  # Esperamos False
