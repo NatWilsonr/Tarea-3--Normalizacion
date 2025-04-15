@@ -95,7 +95,32 @@ def is_key(attributes: set[Attribute], heading: set[Attribute], functional_depen
 
 def is_relvar_in_bcnf(relvar: Relvar):
     # TODO: Actividad 6
-    raise NotImplementedError()
+    #Una relación está en FNBC si todas sus dependencias funcionales no triviales cumplen que:
+    # El determinante (lado izquierdo) sea superclave.
+
+    #Obtenemos los atributos del encabezado
+    encabezado = relvar.heading
+
+    #Recorremos cada dependencia funcional
+    for df in relvar.functional_dependencies:
+        lado_izquierdo = df.determinant
+        lado_derecho = df.dependant
+
+        # Verificamos si es una dependencia NO trivial
+        es_trivial = True
+        for atributo in lado_derecho:
+            if atributo not in lado_izquierdo:
+                es_trivial = False
+                break #nos salimos del ciclo
+
+        # Si no es trivial...
+        if not es_trivial:
+            # ...el lado izquierdo debería ser superclave
+            if not is_superkey(lado_izquierdo, encabezado, relvar.functional_dependencies):
+                return False  # Si alguna no cumple, no está en BCNF
+
+    # Si todas las dependencias no triviales cumplen, entonces sí está en BCNF
+    return True
 
 
 def is_relvar_in_4nf(relvar: Relvar):

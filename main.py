@@ -48,10 +48,7 @@ if __name__ == "__main__": #superllave
     print("\n3- ¿Es superclave?", is_superkey(claves_posibles, encabezado, {fd1, fd2}))
     #Resultado correcto: A determina todo el encabezado -> es una superllave
 
-from normalization.components import Attribute, FunctionalDependency
-from normalization.algorithms import is_key
-
-if __name__ == "__main__":
+if __name__ == "__main__": #llave
     # Creamos los atributos
     A = Attribute("A")
     B = Attribute("B")
@@ -69,4 +66,52 @@ if __name__ == "__main__":
 
     # Prueba 2: A, B no es clave porque no es irreducible
     print("¿{A, B} es clave?", is_key({A, B}, encabezado, {fd1, fd2}))  # Esperamos False
+
+if __name__ == "__main__": #EJ1, FNBC
+    fd1 = FunctionalDependency("{RFC} -> {Nombre, CP}")
+    fd2 = FunctionalDependency("{FolioF} -> {RFC}")
+    fd3 = FunctionalDependency("{FolioF} -> {MontoF, IVA, FechaF}")
+    fd4 = FunctionalDependency("{FolioF} -> {RegimenF, CFDI}")
+    fd5 = FunctionalDependency("{FolioP} -> {MontoP, FechaP}")
+    fd6 = FunctionalDependency("{FolioP} -> {FolioF}")
+    fd7 = FunctionalDependency("{MontoF} -> {IVA}")
+
+    mvd1 = MultivaluedDependency("{RFC} ->-> {RegimenC}")
+
+    relvar = Relvar(
+        heading=["Nombre", "RFC", "CP", "RegimenF", "RegimenC", "CFDI", "FolioF", "MontoF", "IVA", "FechaF", "Producto", "FolioP", "MontoP", "FechaP"],
+        functional_dependencies=[fd1, fd2, fd3, fd4, fd5, fd6],
+        multivalued_dependencies=[mvd1]
+    )
+
+    print(f"Relvar: {relvar}")
+
+    print("\nFunctional dependencies:")
+    for fd in relvar.functional_dependencies:
+        print(fd)
+
+    print("\nMultivalued dependencies:")
+    for mvd in relvar.multivalued_dependencies:
+        print(mvd)
+
+    print("¿La relación está en BCNF?", is_relvar_in_bcnf(relvar))
+
+if __name__ == "__main__": #EJ2, FNBC
+    # Atributos
+    A = Attribute("A")
+    B = Attribute("B")
+    C = Attribute("C")
+
+    # Dependencias funcionales
+    fd1 = FunctionalDependency("{A} -> {B}")
+    fd2 = FunctionalDependency("{A} -> {C}")
+
+    # Creamos la relación
+    relvar_bcnf = Relvar(
+        heading=["A", "B", "C"],
+        functional_dependencies=[fd1, fd2]
+    )
+
+    # Probamos si está en BCNF
+    print("¿Relación simple está en BCNF?", is_relvar_in_bcnf(relvar_bcnf))
 
