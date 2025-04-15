@@ -4,9 +4,16 @@ from dataclasses import dataclass
 
 from .exceptions import InvalidDependency, InvalidExpression
 
+#Este archivo define las clases base que representan los elementos esenciales del modelo relacional, como:
+    # Atributos (Attribute)
+    #Dependencias funcionales y multivaluadas (FunctionalDependency, MultivaluedDependency)
+    #Relaciones (Relvar)
+    # Y una clase abstracta base (Dependency)
 
-@dataclass(frozen=True)
+@dataclass( frozen=True )
 class Attribute:
+    #Representa un solo atributo de una relación.
+    # Se usa para construir conjuntos como {A, B, C}.
     """
     Represents an attribute for a relvar in terms of the relational model design theory.
     Each attribute has a name and is immutable.
@@ -21,6 +28,11 @@ class Attribute:
 
 
 class Dependency(ABC):
+    #Clase base para FunctionalDependency y MultivaluedDependency.
+    # Implementa lógica compartida:
+        # Validación de expresiones como "{A} -> {B}"
+        # Separar determinante y dependiente
+
     """Base abstract class for functional and multivalued dependencies."""
     _CAPTURE_EXPRESSION: str
     _SEPARATOR: str
@@ -77,6 +89,9 @@ class Dependency(ABC):
 
 
 class FunctionalDependency(Dependency):
+    #Representa una dependencia funcional 𝑋 → 𝑌
+    # Usa "->" como separador.
+    
     """Class for functional dependencies."""
     _CAPTURE_EXPRESSION = r"\{[A-z]+(?:,[A-z]+)*\}->\{[A-z]+(?:,[A-z]+)*\}"
     _SEPARATOR = "->"
