@@ -125,4 +125,23 @@ def is_relvar_in_bcnf(relvar: Relvar):
 
 def is_relvar_in_4nf(relvar: Relvar):
     # TODO: Actividad 7
-    raise NotImplementedError()
+    #Una relación está en 4NF si:
+        #1- Está en BCNF
+        #2- Todas las dependencias multivaluadas no triviales tienen como lado izquierdo una superllave.
+
+    #Obtenemos el encabezado
+    encabezado = relvar.heading
+
+    #Revisamos cada dependencia multivaluada
+    for dmv in relvar.multivalued_dependencies:
+        # Verificamos si es NO trivial
+        if not dmv.is_trivial( encabezado ):
+            lado_izquiero = dmv.determinant
+
+            # Si el determinante no es superllave, falla la 4NF
+            if not is_superkey( lado_izquierdo, encabezado, relvar.functional_dependencies ):
+                return False
+
+    # Si todas las DMV cumplen, está en 4NF
+    return True
+    
