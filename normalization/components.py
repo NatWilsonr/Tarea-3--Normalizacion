@@ -102,7 +102,41 @@ class MultivaluedDependency(Dependency):
 
     def is_trivial(self, heading: set[Attribute]) -> bool:
         # TODO: Actividad 2
-        raise NotImplementedError()
+        #Heading: todos los atributos en la relación (encabezado)
+
+        conjunto_dependiente = self.dependant
+        conjunto_determinante = self.determinant
+        conjunto_encabezado = heading
+
+        #Caso 1: verificar si el dependiente esta contenido en el determinante
+        es_subconjunto = True #bandera de resultado
+        for atributo in conjunto_dependiente:
+            if atributo not in conjunto_determinante:
+                es_subconjunto = False
+                break
+
+        if es_subconjunto:
+            return True
+
+        #Caso 2: la union de ambos lados nos da el encabezado completo 
+        union_xy = conjunto_determinante.union(conjunto_dependiente)
+        es_igual_a_encabezado = True 
+
+        #¿Hay algún atributo en el encabezado que no esté en la unión de X y Y?
+        for atributo in conjunto_encabezado:
+            if atributo not in union_xy:
+                es_igual_a_encabezado = False
+                break  #rompe el primer ciclo si encontramos un atributo que falta
+                
+        
+        if es_igual_a_encabezado: #si no todo el encabezado esta en la union, no entramos al ciclo...
+            #¿Hay algún atributo en la unión de X y Y que no esté en el encabezado?
+            for atributo in union_xy:
+                if atributo not in conjunto_encabezado:
+                    es_igual_a_encabezado = False
+                    break
+
+        return es_igual_a_encabezado
 
 
 class Relvar:
